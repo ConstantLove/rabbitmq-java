@@ -1,0 +1,29 @@
+server:
+  port: 8081
+
+####################################
+#
+#   RabbitMQ 消费者基本配置信息
+#
+####################################
+spring:
+  rabbitmq:
+    addresses: 192.168.153.139:5672     # RabbitMQ默认的端口为5672
+    username: guest                     # 安装时设置了用户名密码均为guest
+    password: guest
+    virtual-host: /
+    connection-timeout: 20000
+    listener:                           # 消费者核心配置
+      simple:
+        acknowledge-mode: manual        # 消费消息后，如何确认消息，默认为auto，即自动确认
+        concurrency: 5
+        prefetch: 1
+        max-concurrency: 10
+      hello:                            # 此处及以下为项目中需要使用到的配置信息，写在此处方便维护，在项目中使用${}引用
+        exchange:
+          name: hello-exchange
+          durable: true
+          type: topic
+        key: springboot.*
+        queue:
+          value: queue-hello

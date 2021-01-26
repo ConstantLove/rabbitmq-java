@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+####################################
+#
+#   RabbitMQ 生产者基本配置信息
+#
+####################################
+spring:
+  rabbitmq:
+    addresses: 192.168.153.139:5672    #RabbitMQ默认的端口为5672
+    username: guest                    #安装时设置了用户名密码均为guest
+    password: guest
+    virtual-host: /
+    connection-timeout: 20000
+    publisher-confirms: true           #是否需要消息确认
